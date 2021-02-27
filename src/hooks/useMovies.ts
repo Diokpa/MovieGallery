@@ -7,6 +7,7 @@ export const useMovies = () => {
   const [movies, setMovies] = useState<IMovie[]>()
   const [likedMovies, setLikedMovies] = useState<IMovie[]>()
   const [page, setPage] = useState(1)
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -23,6 +24,10 @@ export const useMovies = () => {
   const prevPage = () => {
     setPage(page !== 0 ? page - 1 : 0)
   }
+
+const toggleLike = (movieId: number) => {
+  setIsLiked(!isLiked);
+}
 
   const movieAction = (id: number, action: 'like' | 'unlike') => {
     const movie = movies?.find(x => x.id === id) as IMovie
@@ -54,6 +59,8 @@ export const useMovies = () => {
     nextPage,
     prevPage,
     movieAction,
-    likedMovies
+    likedMovies,
+    toggleLike,
+    isLiked,
   }
 }

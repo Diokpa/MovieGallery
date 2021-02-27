@@ -12,8 +12,6 @@ import FavoriteMovies from './views/FavoriteMovies/FavoriteMovies';
 
 const App: React.FC = () => {
   
-  const htp = useHttp();
- console.log(htp);
   return (
     <Router>
       <div style={{ display: 'flex' }}>

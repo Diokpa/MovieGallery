@@ -4,13 +4,10 @@ var react_1 = require("react");
 var core_1 = require("@material-ui/core");
 var react_router_dom_1 = require("react-router-dom");
 var react_toastify_1 = require("react-toastify");
-var useHttp_1 = require("./hooks/useHttp");
 var Header_1 = require("./components/Header/Header");
 var Home_1 = require("./views/Home/Home");
 var FavoriteMovies_1 = require("./views/FavoriteMovies/FavoriteMovies");
 var App = function () {
-    var htp = useHttp_1.useHttp();
-    console.log(htp);
     return (react_1["default"].createElement(react_router_dom_1.BrowserRouter, null,
         react_1["default"].createElement("div", { style: { display: 'flex' } },
             react_1["default"].createElement(core_1.CssBaseline, null),

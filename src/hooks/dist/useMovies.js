@@ -44,6 +44,7 @@ exports.useMovies = function () {
     var _a = react_1.useState(), movies = _a[0], setMovies = _a[1];
     var _b = react_1.useState(), likedMovies = _b[0], setLikedMovies = _b[1];
     var _c = react_1.useState(1), page = _c[0], setPage = _c[1];
+    var _d = react_1.useState(false), isLiked = _d[0], setIsLiked = _d[1];
     react_1.useEffect(function () {
         var getData = function () { return __awaiter(void 0, void 0, void 0, function () {
             var response;
@@ -64,6 +65,9 @@ exports.useMovies = function () {
     };
     var prevPage = function () {
         setPage(page !== 0 ? page - 1 : 0);
+    };
+    var toggleLike = function (movieId) {
+        setIsLiked(!isLiked);
     };
     var movieAction = function (id, action) {
         var movie = movies === null || movies === void 0 ? void 0 : movies.find(function (x) { return x.id === id; });
@@ -89,6 +93,8 @@ exports.useMovies = function () {
         nextPage: nextPage,
         prevPage: prevPage,
         movieAction: movieAction,
-        likedMovies: likedMovies
+        likedMovies: likedMovies,
+        toggleLike: toggleLike,
+        isLiked: isLiked
     };
 };
