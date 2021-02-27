@@ -3,13 +3,16 @@ exports.__esModule = true;
 var core_1 = require("@material-ui/core");
 var react_1 = require("react");
 var useMovies_1 = require("../../hooks/useMovies");
+var Movie_1 = require("../../components/Movie/Movie");
+var styles_1 = require("./styles");
 var Home = function () {
+    var classes = styles_1["default"]();
     var _a = useMovies_1.useMovies(), movies = _a.movies, nextPage = _a.nextPage, prevPage = _a.prevPage, movieAction = _a.movieAction;
-    return (react_1["default"].createElement("div", null, movies === null || movies === void 0 ? void 0 : movies.map(function (movie) {
-        return (react_1["default"].createElement("div", null,
-            react_1["default"].createElement("div", null, movie.title),
-            react_1["default"].createElement("div", null,
-                react_1["default"].createElement(core_1.Button, { onClick: function () { return movieAction(movie.id, 'like'); } }, "like"))));
-    })));
+    return (react_1["default"].createElement("main", { className: classes.content },
+        react_1["default"].createElement("div", { className: classes.toolbar }),
+        react_1["default"].createElement(core_1.Grid, { container: true, justify: "center", spacing: 4 }, movies === null || movies === void 0 ? void 0 : movies.map(function (movie) {
+            return (react_1["default"].createElement(core_1.Grid, { key: movie.id, item: true, xs: 12, sm: 6, md: 4, lg: 3 },
+                react_1["default"].createElement(Movie_1["default"], { movie: movie })));
+        }))));
 };
 exports["default"] = Home;
