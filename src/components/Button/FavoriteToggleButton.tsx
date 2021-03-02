@@ -6,18 +6,18 @@ import { IMovie } from  '../../models/movie';
 import { useMovies } from '../../hooks/useMovies';
 import useStyles from './styles';
 
-const FavoriteToggleButton: React.FC<{movie : IMovie }> = ({ movie }) => {
+const FavoriteToggleButton: React.FC<{movieDetails : IMovie }> = ({ movieDetails }) => {
   const classes = useStyles();
   const { toggleLike, isLiked } = useMovies();
   return (
       <Button
-        onClick={() => toggleLike(movie.id)}
+        onClick={() => toggleLike(movieDetails.id)}
         variant='contained'
         color='default'
         className={classes.button}
-        endIcon={isLiked ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+        endIcon={isLiked ?  <FavoriteBorderIcon /> : <FavoriteIcon />}
       >
-        {isLiked ? 'Liked' : 'Like'}
+        {isLiked ? 'Like' : 'Liked'}
       </Button>
   );
 };

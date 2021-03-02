@@ -7,7 +7,7 @@ exports["default"] = styles_1.makeStyles(function () { return ({
         maxWidth: '100%'
     },
     media: {
-        height: 0,
+        height: 550,
         paddingTop: '56.25%'
     },
     cardActions: {

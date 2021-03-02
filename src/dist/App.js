@@ -4,10 +4,13 @@ var react_1 = require("react");
 var core_1 = require("@material-ui/core");
 var react_router_dom_1 = require("react-router-dom");
 var react_toastify_1 = require("react-toastify");
+var useMovies_1 = require("./hooks/useMovies");
 var Header_1 = require("./components/Header/Header");
 var Home_1 = require("./views/Home/Home");
 var FavoriteMovies_1 = require("./views/FavoriteMovies/FavoriteMovies");
 var App = function () {
+    var _a = useMovies_1.useMovies(), movies = _a.movies, likedMovies = _a.likedMovies, nextPage = _a.nextPage, prevPage = _a.prevPage, movieAction = _a.movieAction;
+    console.log(movies);
     return (react_1["default"].createElement(react_router_dom_1.BrowserRouter, null,
         react_1["default"].createElement("div", { style: { display: 'flex' } },
             react_1["default"].createElement(core_1.CssBaseline, null),

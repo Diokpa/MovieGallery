@@ -20,4 +20,15 @@ export interface IMovie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  isLiked: boolean;
+}
+
+export interface IMovieProps {
+  movie: IMovie;
+  movieList: IMovie[];
+}
+
+export interface IToggleMovie {
+  movieId: number;
+  likedState: boolean;
 }

@@ -35,6 +35,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 exports.__esModule = true;
 exports.useMovies = void 0;
 var react_1 = require("react");
@@ -42,15 +49,17 @@ var useHttp_1 = require("./useHttp");
 exports.useMovies = function () {
     var get = useHttp_1.useHttp().get;
     var _a = react_1.useState(), movies = _a[0], setMovies = _a[1];
-    var _b = react_1.useState(), likedMovies = _b[0], setLikedMovies = _b[1];
+    var _b = react_1.useState([]), likedMovies = _b[0], setLikedMovies = _b[1];
     var _c = react_1.useState(1), page = _c[0], setPage = _c[1];
-    var _d = react_1.useState(false), isLiked = _d[0], setIsLiked = _d[1];
+    var _d = react_1.useState(!false), isLiked = _d[0], setIsLiked = _d[1];
+    //let LikedList: IMovie[] = [];
+    var route = '/movie/popular/';
     react_1.useEffect(function () {
         var getData = function () { return __awaiter(void 0, void 0, void 0, function () {
             var response;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, get("/movie/popular/?page=" + page)];
+                    case 0: return [4 /*yield*/, get(route + "?page=" + page)];
                     case 1:
                         response = _a.sent();
                         setMovies(response.data.results);
@@ -68,33 +77,45 @@ exports.useMovies = function () {
     };
     var toggleLike = function (movieId) {
         setIsLiked(!isLiked);
-    };
-    var movieAction = function (id, action) {
-        var movie = movies === null || movies === void 0 ? void 0 : movies.find(function (x) { return x.id === id; });
-        var foundMovie = likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.find(function (x) { return x.id === id; });
-        switch (action) {
-            case 'like': {
-                if (!foundMovie)
-                    likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.push(movie);
-                setLikedMovies(likedMovies);
-                break;
+        console.log(isLiked);
+        var movie = movies === null || movies === void 0 ? void 0 : movies.find(function (x) { return x.id === movieId; });
+        var foundMovie = likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.find(function (x) { return x.id === movieId; });
+        if (isLiked) {
+            if (!foundMovie) {
+                setLikedMovies(function (prevLikedMovies) { return __spreadArrays(prevLikedMovies, [movie]); });
             }
-            case 'unlike': {
-                if (foundMovie)
-                    setLikedMovies(likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.filter(function (x) { return x.id !== foundMovie.id; }));
-                break;
-            }
-            default:
-                break;
         }
-    };
-    return {
-        movies: movies,
-        nextPage: nextPage,
-        prevPage: prevPage,
-        movieAction: movieAction,
-        likedMovies: likedMovies,
-        toggleLike: toggleLike,
-        isLiked: isLiked
+        else {
+            setLikedMovies(likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.filter(function (x) { return x.id !== foundMovie.id; }));
+        }
+        console.log(likedMovies);
+        var movieAction = function (id, action) {
+            var movie = movies === null || movies === void 0 ? void 0 : movies.find(function (x) { return x.id === id; });
+            var foundMovie = likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.find(function (x) { return x.id === id; });
+            switch (action) {
+                case 'like': {
+                    if (!foundMovie)
+                        likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.push(movie);
+                    setLikedMovies(likedMovies);
+                    break;
+                }
+                case 'unlike': {
+                    if (foundMovie)
+                        setLikedMovies(likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.filter(function (x) { return x.id !== foundMovie.id; }));
+                    break;
+                }
+                default:
+                    break;
+            }
+        };
+        return {
+            movies: movies,
+            nextPage: nextPage,
+            prevPage: prevPage,
+            movieAction: movieAction,
+            likedMovies: likedMovies,
+            toggleLike: toggleLike,
+            isLiked: isLiked
+        };
     };
 };
