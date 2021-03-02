@@ -89,33 +89,33 @@ exports.useMovies = function () {
             setLikedMovies(likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.filter(function (x) { return x.id !== foundMovie.id; }));
         }
         console.log(likedMovies);
-        var movieAction = function (id, action) {
-            var movie = movies === null || movies === void 0 ? void 0 : movies.find(function (x) { return x.id === id; });
-            var foundMovie = likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.find(function (x) { return x.id === id; });
-            switch (action) {
-                case 'like': {
-                    if (!foundMovie)
-                        likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.push(movie);
-                    setLikedMovies(likedMovies);
-                    break;
-                }
-                case 'unlike': {
-                    if (foundMovie)
-                        setLikedMovies(likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.filter(function (x) { return x.id !== foundMovie.id; }));
-                    break;
-                }
-                default:
-                    break;
+    };
+    var movieAction = function (id, action) {
+        var movie = movies === null || movies === void 0 ? void 0 : movies.find(function (x) { return x.id === id; });
+        var foundMovie = likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.find(function (x) { return x.id === id; });
+        switch (action) {
+            case 'like': {
+                if (!foundMovie)
+                    likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.push(movie);
+                setLikedMovies(likedMovies);
+                break;
             }
-        };
-        return {
-            movies: movies,
-            nextPage: nextPage,
-            prevPage: prevPage,
-            movieAction: movieAction,
-            likedMovies: likedMovies,
-            toggleLike: toggleLike,
-            isLiked: isLiked
-        };
+            case 'unlike': {
+                if (foundMovie)
+                    setLikedMovies(likedMovies === null || likedMovies === void 0 ? void 0 : likedMovies.filter(function (x) { return x.id !== foundMovie.id; }));
+                break;
+            }
+            default:
+                break;
+        }
+    };
+    return {
+        movies: movies,
+        nextPage: nextPage,
+        prevPage: prevPage,
+        movieAction: movieAction,
+        likedMovies: likedMovies,
+        toggleLike: toggleLike,
+        isLiked: isLiked
     };
 };

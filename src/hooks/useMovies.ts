@@ -43,6 +43,8 @@ export const useMovies = () => {
 
     console.log(likedMovies);
 
+  }
+
   const movieAction = (id: number, action: 'like' | 'unlike') => {
     const movie = movies?.find(x => x.id === id) as IMovie
     const foundMovie = likedMovies?.find(x => x.id === id) as IMovie
